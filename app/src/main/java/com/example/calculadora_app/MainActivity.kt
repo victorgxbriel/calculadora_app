@@ -271,23 +271,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun formatDouble(number: Double): String {
-        val formatter = DecimalFormat("0.##########")
-        return formatter.format(number)
+        return if(number % 1.0 == 0.0) {
+            number.toInt().toString()
+        } else {
+            DecimalFormat("0.##########").format(number)
+        }
     }
 
     private fun updateDisplay(rotate: Boolean = false, expression: String = "") {
-        if(isAfterEquals && !rotate) return
-        tvDisplay.text = currentInput.ifEmpty { (operand?.toString() ?: "0") }
+        if (isAfterEquals && !rotate) return
+
+        tvDisplay.text = if (currentInput.isNotEmpty()) {
+            currentInput.toDoubleOrNull()?.let { formatDouble(it) } ?: currentInput
+        } else {
+            operand?.let { formatDouble(it) } ?: "0"
+        }
 
         val operationText = buildString {
-            if(operand != null) {
+            if (operand != null) {
                 append(formatDouble(operand!!))
             }
-            if(pendingOp != null) {
+            if (pendingOp != null) {
                 append(" $pendingOp ")
             }
         }
-        tvOperation.text = expression.ifEmpty { operationText }
+        tvOperation.text = if (expression.isNotEmpty()) expression else operationText
     }
 
     private fun showHistoryDialog() {

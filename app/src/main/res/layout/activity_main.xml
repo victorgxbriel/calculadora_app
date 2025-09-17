@@ -16,9 +16,8 @@
         android:contentDescription="Histórico de Cálculos"
         app:icon="@drawable/ic_history_white"
         app:iconTint="?attr/colorOnPrimaryContainer"
-        app:layout_constraintTop_toTopOf="@id/txtOperacao"
-        app:layout_constraintBottom_toBottomOf="@id/txtResultado"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/txtResultado"
+        app:layout_constraintStart_toStartOf="@id/txtResultado" />
 
     <!-- Display da operação -->
     <TextView
@@ -34,17 +33,19 @@
 
     <!-- Display da calculadora -->
     <TextView
-        android:id="@+id/txtResultado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:text="0"
-        android:textSize="32sp"
-        android:textColor="@android:color/white"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/txtOperacao"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    android:id="@+id/txtResultado"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:minHeight="120dp"
+    android:gravity="bottom|end"
+    android:text="0"
+    android:textSize="80sp"
+    android:textColor="@android:color/white"
+    android:padding="16dp"
+    app:layout_constraintTop_toBottomOf="@id/txtOperacao"
+    app:layout_constraintBottom_toTopOf="@id/gridButtons"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Grade de botões -->
     <GridLayout
