@@ -1,29 +1,26 @@
 package com.example.calculadora_app
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import java.text.DecimalFormat
-import kotlin.math.exp
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tvDisplay: TextView
     private lateinit var tvOperation: TextView
+    private var btnMC: Button? = null
+    private var btnMR: Button? = null
 
     private var currentInput: String = ""
     private var operand: Double? = null
     private var pendingOp: String? = null
     private var isAfterEquals = false
     private var historyList = ArrayList<String>()
+    private var memoryValue: Double? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         tvDisplay = findViewById(R.id.txtResultado)
         tvOperation = findViewById(R.id.txtOperacao)
+
+        btnMC = findViewById(R.id.btnMC)
+        btnMR = findViewById(R.id.btnMR)
 
         // Botões de dígitos
         val digits = listOf(
@@ -80,6 +80,100 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Botão elevar ao quadrado
+        findViewById<Button>(R.id.btnSquare)?.setOnClickListener { onSquare() }
+
+        // Botão de inverter
+        findViewById<Button>(R.id.btnReverse)?.setOnClickListener { onReverse() }
+
+        val mems = listOf(
+            "MC" to R.id.btnMC,
+            "MR" to R.id.btnMR,
+            "M+" to R.id.btnMAdd,
+            "M-" to R.id.btnMSub,
+            "MS" to R.id.btnMS
+        )
+        mems.forEach { (mem, id) ->
+            findViewById<Button>(id)?.setOnClickListener { memoryOp(mem) }
+        }
+
+        updateMemoryButtonsState()
+    }
+
+    private fun memoryOp(mem: String) {
+        val displayValue = getDisplayValue() ?: return
+
+        when (mem) {
+            "MS" -> { // Memory Store
+                memoryValue = displayValue
+            }
+            "MC" -> { // Memory Clear
+                memoryValue = null
+            }
+            "MR" -> { // Memory Recall
+                if (memoryValue != null) {
+                    currentInput = formatDouble(memoryValue!!)
+                    operand = null
+                    pendingOp = null
+                    updateDisplay()
+                }
+            }
+            "M+" -> { // Memory Add
+                if (memoryValue != null) {
+                    memoryValue = memoryValue!! + displayValue
+                } else {
+                    // Se a memória está vazia, M+ se comporta como MS
+                    memoryValue = displayValue
+                }
+                isAfterEquals = true
+            }
+            "M-" -> { // Memory Subtract
+                if (memoryValue != null) {
+                    memoryValue = memoryValue!! - displayValue
+                } else {
+                    // Se a memória está vazia, M- armazena o valor negativo
+                    memoryValue = -displayValue
+                }
+                isAfterEquals = true
+            }
+        }
+        updateMemoryButtonsState()
+    }
+
+    private fun onSquare() {
+        performUnaryOperation("sqr") { it * it }
+    }
+
+    private fun onReverse() {
+        performUnaryOperation("1/") {
+            if (it == 0.0) {
+                Toast.makeText(this, "Não é possível dividir por zero", Toast.LENGTH_SHORT).show()
+                it
+            } else {
+                1 / it
+            }
+        }
+    }
+
+    private fun performUnaryOperation(symbol: String, operation: (Double) -> Double) {
+        if (currentInput.isNotEmpty()) {
+            val value = currentInput.toDoubleOrNull() ?: return
+
+            val result = operation(value)
+
+            val expression = "$symbol(${formatDouble(value)})"
+            val resultString = formatDouble(result)
+
+            historyList.add("$expression = $resultString")
+
+            tvOperation.text = expression
+            tvDisplay.text = resultString
+
+            currentInput = resultString
+            operand = null
+            pendingOp = null
+            isAfterEquals = true
+        }
     }
 
     private fun onOperator(op: String) {
@@ -90,8 +184,8 @@ class MainActivity : AppCompatActivity() {
 
         if(currentInput.isNotEmpty()) {
             val value = currentInput.toDoubleOrNull() ?: return
-            if(operand == null)  operand = value
-            else operand = performOperation(operand!!, value, pendingOp)
+            operand = if(operand == null) value
+            else performOperation(operand!!, value, pendingOp)
         }
         pendingOp = op
         currentInput = ""
@@ -183,7 +277,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateDisplay(rotate: Boolean = false, expression: String = "") {
         if(isAfterEquals && !rotate) return
-        tvDisplay.text = if (currentInput.isNotEmpty()) currentInput else (operand?.toString() ?: "0")
+        tvDisplay.text = currentInput.ifEmpty { (operand?.toString() ?: "0") }
 
         val operationText = buildString {
             if(operand != null) {
@@ -210,6 +304,16 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun getDisplayValue(): Double? {
+        return tvDisplay.text.toString().toDoubleOrNull()
+    }
+
+    private fun updateMemoryButtonsState() {
+        val isMemorySet = memoryValue != null
+        btnMC?.isEnabled = isMemorySet
+        btnMR?.isEnabled = isMemorySet
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("currentInput", currentInput)
@@ -217,6 +321,7 @@ class MainActivity : AppCompatActivity() {
         outState.putString("pendingOp", pendingOp)
         outState.putBoolean("isAfterEquals", isAfterEquals)
         outState.putStringArrayList("historyList", historyList)
+        outState.putDouble("memoryValue", memoryValue ?: Double.NaN)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -227,7 +332,10 @@ class MainActivity : AppCompatActivity() {
         pendingOp = savedInstanceState.getString("pendingOp")
         isAfterEquals = savedInstanceState.getBoolean("isAfterEquals", false)
         historyList = savedInstanceState.getStringArrayList("historyList")!!
-        if(isAfterEquals) updateDisplay(true, historyList.get(historyList.size - 1))
+        val mem = savedInstanceState.getDouble("memoryValue", Double.NaN)
+        memoryValue = if (mem.isNaN()) null else mem
+        updateMemoryButtonsState()
+        if(isAfterEquals) updateDisplay(true, historyList[historyList.size - 1])
         else updateDisplay(true)
     }
 }

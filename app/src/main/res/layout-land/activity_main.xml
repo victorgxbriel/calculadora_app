@@ -46,6 +46,118 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/custom_button_memory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/txtResultado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMC"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MC" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMR"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MR" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMAdd"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="M+" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMSub"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="M-" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMS"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MS" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/custom_button_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/custom_button_memory"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:divider="@drawable/spacer"
+        android:showDividers="middle">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClearEntry"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CE" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClear"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="C" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSquare"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="𝑥²" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReverse"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="⅟𝑥" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDividir"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="÷" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBackspace"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="⌫" />
+
+    </LinearLayout>
+
     <!-- Grade de botões -->
     <GridLayout
         android:id="@+id/gridButtons"
@@ -59,134 +171,175 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtResultado"
+        app:layout_constraintTop_toBottomOf="@id/custom_button_row"
         app:layout_constraintVertical_bias="0.0">
 
         <!-- Linha 1 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnClearEntry"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
-            android:text="CE" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnClear"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:text="C" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBackspace"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
-            android:text="⌫" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDividir"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="150dp"
-            android:text="÷" />
 
         <!-- Linha 2 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn7"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="7" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn8"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="8" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn9"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="9" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMultiplicar"
             style="@style/Widget.Material3.Button"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="×" />
 
         <!-- Linha 3 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn4"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="4" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn5"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="5" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn6"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="6" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubtrair"
             style="@style/Widget.Material3.Button"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="-" />
 
         <!-- Linha 4 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn1"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn2"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn3"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSomar"
             style="@style/Widget.Material3.Button"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="+" />
 
         <!-- Linha 5 -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMaisMenos"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="±" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn0"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPonto"
             style="@style/Widget.Material3.Button"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="." />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnIgual"
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill"
             android:text="=" />
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
