@@ -360,7 +360,7 @@ class MainActivity : AppCompatActivity() {
         val mem = savedInstanceState.getDouble("memoryValue", Double.NaN)
         memoryValue = if (mem.isNaN()) null else mem
         updateMemoryButtonsState()
-        if(isAfterEquals) updateDisplay(true, historyList[historyList.size - 1])
+        if(isAfterEquals && historyList.isNotEmpty()) updateDisplay(true, historyList[historyList.size - 1])
         else updateDisplay(true)
     }
 }

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="Histórico de Cálculos"
         app:icon="@drawable/ic_history_white"
-        app:iconTint="?attr/colorOnPrimaryContainer"
+        app:iconTint="@android:color/white"
         app:layout_constraintTop_toTopOf="@id/txtOperacao"
         app:layout_constraintBottom_toBottomOf="@id/txtResultado"
         app:layout_constraintStart_toStartOf="parent" />
@@ -57,7 +57,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMC"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,7 +65,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMR"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMAdd"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMSub"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -89,7 +89,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMS"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

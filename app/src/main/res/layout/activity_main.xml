@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="Histórico de Cálculos"
         app:icon="@drawable/ic_history_white"
-        app:iconTint="?attr/colorOnPrimaryContainer"
+        app:iconTint="@android:color/white"
         app:layout_constraintTop_toTopOf="@id/txtOperacao"
         app:layout_constraintBottom_toBottomOf="@id/txtOperacao"
         app:layout_constraintStart_toStartOf="parent" />
