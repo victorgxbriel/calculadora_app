@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
     private var historyList = ArrayList<String>()
     private var memoryValue: Double? = null
 
+    companion object {
+        private const val MAX_DIGITS_PORTRAIT = 8
+        private const val MAX_DIGITS_LANDSCAPE = 11
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -243,6 +248,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun appendDigit(d: String) {
+        val maxLength = when (resources.configuration.orientation) {
+            android.content.res.Configuration.ORIENTATION_LANDSCAPE -> MAX_DIGITS_LANDSCAPE
+            else -> MAX_DIGITS_PORTRAIT
+        }
+
+        if (currentInput.length >= maxLength) {
+            if(currentInput.length == maxLength) {
+                Toast.makeText(this, "Limite de $maxLength dígitos atingido", Toast.LENGTH_SHORT).show()
+            }
+            return
+        }
+
         if(isAfterEquals) {
             clearAll()
         }
@@ -272,7 +289,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun formatDouble(number: Double): String {
         return if(number % 1.0 == 0.0) {
-            number.toInt().toString()
+            number.toLong().toString()
         } else {
             DecimalFormat("0.##########").format(number)
         }

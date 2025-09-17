@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:background="@android:color/black"
@@ -16,8 +17,9 @@
         android:contentDescription="Histórico de Cálculos"
         app:icon="@drawable/ic_history_white"
         app:iconTint="?attr/colorOnPrimaryContainer"
-        app:layout_constraintTop_toTopOf="@id/txtResultado"
-        app:layout_constraintStart_toStartOf="@id/txtResultado" />
+        app:layout_constraintTop_toTopOf="@id/txtOperacao"
+        app:layout_constraintBottom_toBottomOf="@id/txtOperacao"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Display da operação -->
     <TextView
@@ -25,10 +27,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnHistory"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Display da calculadora -->
